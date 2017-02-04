@@ -75,3 +75,88 @@ void pairWiseSwap(struct node *head)
 
 
 YOU MUST PASS THE PPOINTER(HEAD) USING CALL BY REFERENCE CONCEPT FOR ABOVE CODE TO WORK.
+  ALTERNATIVE SOLUTION BECAUSE PASS BY REFERENCE WONT WORK FOR THIS TYPE OF SITUATION. 
+
+  
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node * next;
+};
+void pairWiseSwap(struct node *head)
+{
+    struct node *p,*r,*q;
+    int c=0;
+    q = (struct node *)malloc(sizeof(struct node));
+    q->data=head->data;
+    q->next=p;
+    p = head->next;
+    r = q;
+    r->next=p;
+    
+   
+    while(q!=NULL)
+    {
+        if(p==NULL)
+        {
+            goto a;
+        }
+        q->next=p->next;
+        p->next=q;
+        if(c>0)
+        {
+            r->next=p;
+            r=r->next->next;
+        }
+        c++;
+        if(p->next->next==NULL)
+        {
+            break;
+        }
+        if(p->next->next->next==NULL)
+        {
+            p=NULL;
+            goto a;
+        }
+        p=p->next->next->next;
+    a: q = q->next;
+    }
+   
+    
+}
+
+int main()
+{
+    
+    struct node *start = NULL,*g=NULL,*x=NULL,*q=NULL;
+    int i;
+    
+    for(i=1;i<=8;i++)
+    {
+        x = (struct node*)malloc(sizeof(struct node));
+        if(i==1)
+        {
+            g=x;
+            start=g;
+        }
+        x->data=i;
+        if(i>1)
+        {
+            g->next = x;
+            g=g->next;
+        }
+    }
+    g->next=NULL;
+    pairWiseSwap(start);
+    start=start->next;
+    printf("after func head is %d\n",start->data);
+    q=start;
+    while(q!=NULL)
+    {
+        printf("%d %d\n",q->data,q->next->data);
+        q=q->next;
+    }
+    
+}
