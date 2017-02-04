@@ -43,7 +43,7 @@ void pairWiseSwap(struct node *head)
   q = head;
   p = head->next;
   r = head;
-  head = head->next;
+  *head = *head->next;
   while(q!=NULL)
   {
       if(p==NULL)
