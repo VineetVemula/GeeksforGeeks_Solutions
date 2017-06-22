@@ -32,20 +32,20 @@ The first person takes times 3 and 5 for jobs 1 and 2 respectively. The second p
 
 
 #include <stdio.h>
-int x[10],out,t,n;
+int x[100],out=999,t,n;
 void nextvalue(int k)
 {
     int j;
     a: x[k]=(x[k]+1)%(n+1);
     if(x[k]==0)
         return ;
-    for(j=1;j<k-1;j++)
+    for(j=1;j<=k-1;j++)
     {
         if(x[j]==x[k])
             goto a;
     }
 }
-void nqueens(int z[][10],int k)
+void nqueens(int z[][100],int k)
 {
     int i,o=0;
     b: nextvalue(k);
@@ -55,27 +55,27 @@ void nqueens(int z[][10],int k)
     }
     if(k==n)
     {
-        for(i=1;i<n;i++)
+        for(i=1;i<=n;i++)
         {
             o = o + z[i][x[i]];
         }
-        if(out<o)
+        if(out>o)
         {
             out=o;
         }
-	o=0;
+        o=0;
     }
     else nqueens(z,k+1);
     goto b;
 }
 int main() 
 {
-    int i,j,a[10][10];
+    int i,j,a[100][100];
 	scanf("%d",&t);
 	while(t--)
 	{
 	    scanf("%d",&n);
-	    for(i=0;i<10;i++)
+	    for(i=0;i<100;i++)
 	    {
 	        x[i]=0;
 	    }
@@ -87,7 +87,7 @@ int main()
 	        }
 	    }
 	    nqueens(a,1);
-	    printf("%d",out);
+	    printf("%d\n",out);
 	}
 	return 0;
 	
