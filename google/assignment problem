@@ -63,6 +63,7 @@ void nqueens(int z[][10],int k)
         {
             out=o;
         }
+	o=0;
     }
     else nqueens(z,k+1);
     goto b;
