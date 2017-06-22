@@ -49,7 +49,7 @@ void nqueens(int z[][10],int k)
 {
     int i,o=0;
     b: nextvalue(k);
-    if(x[k]=0)
+    if(x[k]==0)
     {
         return;
     }
