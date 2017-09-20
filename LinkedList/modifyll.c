@@ -1,0 +1,52 @@
+Given a singly linked list containing n nodes. Modify the value of first half nodes such that 1st node’s new value is equal to the last node’s value minus first node’s current value, 2nd node’s new value is equal to the second last node’s value minus 2nd node’s current value, likewise for first half nodes. If n is odd then the value of the middle node remains unchanged.
+Note: Input in the linked list is like new node will be entered at the head position (1st position).
+
+Input:
+First line consists of T test cases. First line of every test case consists of N, denoting the number of nodes. Second line of every test case consists of Node of linked list.
+
+Output:
+Single line output, return the head of modified linked list.
+
+Constraints:
+1<=T<=200
+1<=N<=100
+
+Example:
+Input:
+2
+5
+10 4 5 3 6
+6
+2 9 8 12 7 10
+Output:
+-4 -1 5 4 10
+8 -2 4 8 9 2
+
+--CODE--
+
+struct Node* modifyTheList(struct Node *head)
+{
+    struct Node *st,*en,*s;
+    int c=0,i=0,j,m;
+    s=head;
+    en=head;
+    st=head;
+    while(en!=NULL)
+    {
+        en=en->next;
+        c++;
+    }
+    while(1)
+    {
+        m=c-i;
+        en=head;
+        for(j=1;j<m;j++)
+            en=en->next;
+        if(en==st || en->next==st)
+            return s;
+        st->data=(st->data)-(en->data);
+        st=st->next;
+        i++;
+    }
+    return s;
+}
