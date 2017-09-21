@@ -25,7 +25,27 @@ Input:
 Output:
 2 1 4 2 6 5 8 7
 
-SOLUTION
+--CODE--
+  
+  
+  void pairWiseSwap(struct node *head)
+{
+    struct node *p,*q;
+    int x;
+    p=head;
+    q=head->next;
+    while(q!=NULL && p!=NULL)
+    {
+        x=p->data;
+        p->data=q->data;
+        q->data=x;
+        p=q->next;
+        if(p!=NULL)
+            q=p->next;
+    }
+}
+  
+  
 *
   Pairwise swap a linked list
   The input list will have at least one element  
