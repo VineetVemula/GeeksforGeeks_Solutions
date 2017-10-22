@@ -188,3 +188,69 @@ void findLongestPalindromicString(char text[])
         printf("\n");
     }
 }
+
+ALTERNATE SIMPLE SOLUTION
+
+void findLongestPalindromicString(char text[])
+{
+    // code here
+    int len = strlen(text);
+    int max = 1;
+    int left = 1, right = 1;
+    for (int i = 0; i < len; i++)
+    {
+        int l = i, r = i;
+        while (l >= 0 && r < len)
+        {
+            if (text[l] != text[r])
+            {
+                break;
+            }
+            else
+            {
+                int curLength = r - l + 1;
+                if (curLength > max)
+                {
+                    max = curLength;
+                    right = r;
+                    left = l;
+                }
+            }
+            
+            l--;
+            r++;
+        }
+        
+        l = i;
+        r = i + 1;
+        while (l >= 0 && r < len)
+        {
+            if (text[l] != text[r])
+            {
+                break;
+            }
+            else
+            {
+                int curLength = r - l + 1;
+                if (curLength > max)
+                {
+                    max = curLength;
+                    right = r;
+                    left = l;
+                }
+            }
+            
+            l--;
+            r++;
+        }
+        
+        
+    }
+    
+    for (int i = left; i <= right; i++)
+    {
+        cout << text[i];
+    }
+    
+    cout << endl;
+}
