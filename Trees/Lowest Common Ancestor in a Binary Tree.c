@@ -27,7 +27,7 @@ Output
 
 Node* arr[100];
 int o;
-void in(Node * x,Node* a[],Node* b[],int na,int nb,int *n,int m)
+void in(Node * x,Node* a[],Node* b[],int na,int nb,int *n,int m,int * l1,int*l2)
 {
     if(x!=NULL)
     {
@@ -38,6 +38,7 @@ void in(Node * x,Node* a[],Node* b[],int na,int nb,int *n,int m)
             {
                 a[o]=arr[o];
             }
+            *l1=m;
         }
         if(x->data==nb)
         {
@@ -45,31 +46,31 @@ void in(Node * x,Node* a[],Node* b[],int na,int nb,int *n,int m)
             {
                 b[o]=arr[o];
             }
+            *l2=m;
         }
-        in(x->left,a,b,na,nb,n,m+1);
+        in(x->left,a,b,na,nb,n,m+1,l1,l2);
         (*n)++;
-        in(x->right,a,b,na,nb,n,m+1);
+        in(x->right,a,b,na,nb,n,m+1,l1,l2);
     }
 }
 Node * LCA(Node* root ,int n1 ,int n2)
 {
     Node * a[101],*b[101],*p;
-    int n=0,i;
-    if(n1==1 && n2==1)
+    int n=0,i,np,l1,l2;
+    /*if(n1==1 && n2==1)
     {
         p->data=1;
         return p;
-    }
-    in(root,a,b,n1,n2,&n,0);
-    for(i=0;i<=n;i++)
+    }*/
+    in(root,a,b,n1,n2,&n,0,&l1,&l2);
+    if(l1>l2)
+        np=l1;
+    else np=l2;
+    for(i=0;i<=np;i++)
     {
         if(a[i]!=b[i])
             break;
     }
     p=b[i-1];
-    for(i=0;i<=n;i++)
-    {
-        arr[i]=NULL; 
-    }
     return p;
 }
