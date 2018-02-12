@@ -157,18 +157,6 @@ int maxHeight(int height[],int width[],int length[],int n)
             }
         }
     }
-    int result = 0;
-    result=dp(fclen-1,101,101,face,ans);
-    for(i=0;i<fclen;i++)
-    {
-        for(j=0;j<=101;j++)
-        {
-            for(k=0;k<=101;k++)
-            {
-                ans[i].area[j][k]=-1;
-            }
-        }
-    }
-    fclen=0;
+    int result = dp(fclen-1,101,101,face,ans);
     return result;
 }
