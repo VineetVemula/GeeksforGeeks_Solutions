@@ -1,0 +1,41 @@
+
+
+--code--
+
+#include<stdio.h>
+#include<limits.h>
+int dp(int l,int x,int y,int z,int db[])
+{
+    if(l<0)
+        return INT_MIN;
+    if(db[l]!=-1)
+        return db[l];
+    int a=-1,b=-1,c=-1;
+    a = dp(l-x,x,y,z,db) + 1;
+    b = dp(l-y,x,y,z,db) + 1;
+    c = dp(l-z,x,y,z,db) + 1;
+    db[l] = a>b?(a>c?a:c):(b>c?b:c);
+    return db[l];
+}
+int main()
+{
+	int t;
+	scanf("%d",&t);
+	while(t--)
+	{
+	    int n;
+	    scanf("%d",&n);
+	    int x,y,z,i;
+	    scanf("%d %d %d",&x,&y,&z);
+	    int db[n+1];
+	    db[0]=0;
+	    for(i=1;i<=n;i++)
+	    {
+	        db[i]=-1;
+	    }
+	    int result = dp(n,x,y,z,db);
+	    printf("%d\n",result);
+	    
+	}
+	return 0;
+}
