@@ -1,0 +1,31 @@
+#include<string.h>
+bool dp(string A,string B,string C,int a,int b,int c,int la,int lb,int lc)
+{
+    bool ans1=false,ans2=false;
+    if(a==la && b==lb && c==lc)
+        return true;
+    if(a<la && c<lc && A[a]==C[c])
+    {
+        ans1=dp(A,B,C,a+1,b,c+1,la,lb,lc);
+    }
+    if(b<lb && c<lc && B[b]==C[c])
+    {
+        ans2=dp(A,B,C,a,b+1,c+1,la,lb,lc);
+    }
+    return (ans1==true?ans1:ans2);
+}
+bool isInterleave(string A, string B, string C) 
+{
+    int a=0,b=0,c=0;
+    size_t la,lb,lc;
+    la=A.length();
+    lb=B.length();
+    lc=C.length();
+    char AA[la+1],BB[lb+1],CC[lc+1];
+    strcpy(AA, A.c_str());
+    strcpy(BB, B.c_str());
+    strcpy(CC, C.c_str());
+    bool ans;
+    ans=dp(AA,BB,CC,a,b,c,la,lb,lc);
+    return ans;
+}
