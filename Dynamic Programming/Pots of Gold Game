@@ -1,0 +1,42 @@
+int min(int a,int b)
+{
+    return(a<b?a:b);
+}
+int max(int a,int b)
+{
+    return(a>b?a:b);
+}
+
+int dp(int a, int b,int n, int db[][101], int A[])
+{
+    if(db[a][b]!=-1)
+    {
+        return db[a][b];
+    }
+    if(a==b)
+    {
+        db[a][b]=A[a];
+        return db[a][b];
+    }
+    if(a==b-1)
+    {
+        db[a][b]= max(A[a],A[b]);
+        return db[a][b];
+    }
+    db[a][b]=max(A[a] + min(dp(a+2,b,n,db,A),dp(a+1,b-1,n,db,A)),A[b] + min(dp(a+1,b-1,n,db,A),dp(a,b-2,n,db,A)));
+    return db[a][b];
+}
+int maxCoins(int A[],int N)
+{
+    int db[N][101];
+    int i,j,ans;
+    for(i=0;i<N;i++)
+    {
+        for(j=0;j<N;j++)
+        {
+            db[i][j]=-1;
+        }
+    }
+    ans=dp(0,N-1,N,db,A);
+    return ans;
+}
