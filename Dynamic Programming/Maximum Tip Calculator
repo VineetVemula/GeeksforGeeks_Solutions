@@ -1,0 +1,51 @@
+#include<stdio.h>
+int tip(int i, int x, int y,int a[],int b[],int db[][106])
+{
+    if(i<0)
+        return 0;
+    if(db[x][y]!=-1)
+        return db[x][y];
+    int rahul=0,ankit=0;
+    if(x>0)
+        rahul = tip(i-1,x-1,y,a,b,db) + a[i];
+    if(y>0)
+        ankit = tip(i-1,x,y-1,a,b,db) + b[i];
+    if(rahul>ankit)
+    {
+        db[x][y] = rahul;
+        return rahul;
+    }
+    else
+    {
+        db[x][y] = ankit;
+        return ankit;
+    }
+    
+}
+int main()
+{
+	int t,n,db[106][106],x,y,i,j,a[106],b[106],ans;
+	scanf("%d",&t);
+	while(t--)
+	{
+	    scanf("%d %d %d",&n,&x,&y);
+	    for(i=0;i<106;i++)
+	    {
+	        for(j=0;j<106;j++)
+	        {
+	            db[i][j]=-1;
+	        }
+	    }
+	    for(i=0;i<n;i++)
+	    {
+	        scanf("%d ",&a[i]);
+	    }
+	    for(i=0;i<n;i++)
+	    {
+	        scanf("%d ",&b[i]);
+	    }
+	    ans = tip(n-1,x,y,a,b,db);
+	    printf("%d\n",ans);
+	}
+	return 0;
+}
