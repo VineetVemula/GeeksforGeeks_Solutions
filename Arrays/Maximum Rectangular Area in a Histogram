@@ -1,0 +1,44 @@
+#include<stdio.h>
+int findrec(int st, int end,int a[])
+{
+    if(end<st)
+    {
+        return -1;
+    }
+    if(end==st)
+    {
+        return a[st];
+    }
+    int i,min=1001,pos,max=0,left,right;
+    for(i=st;i<=end;i++)
+    {
+        if(min>a[i])
+        {
+            min=a[i];
+            pos=i;
+        }
+    }
+    max = min*(end-st+1);
+    left = findrec(st,pos-1,a);
+    right = findrec(pos+1,end,a);
+    return (max>left?(max>right?max:right):(left>right?left:right));
+}
+int main()
+{
+	//code
+	int t,n,i,j,max=0;
+	scanf("%d",&t);
+	int arr[101];
+	while(t--)
+	{
+	    scanf("%d",&n);
+	    for(i=0;i<n;i++)
+	    {
+	        scanf("%d",&arr[i]);
+	    }
+	    max = findrec(0,n-1,arr);
+	    printf("%d\n",max);
+	    
+	}
+	return 0;
+}
