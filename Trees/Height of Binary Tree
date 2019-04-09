@@ -1,0 +1,20 @@
+int height(Node* node)
+{
+   // Your code here
+   int a=0,b=0;
+   if(node->left==NULL && node->right==NULL)
+   {
+       return 1;
+   }
+   if(node->left!=NULL)
+   {
+       a = height(node->left);
+       a++;
+   }
+   if(node->right!=NULL)
+   {
+       b = height(node->right);
+       b++;
+   }
+   return(a>b?a:b);
+}
