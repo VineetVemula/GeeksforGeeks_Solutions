@@ -1,0 +1,16 @@
+class GfG
+{
+    void deleteNode(Node del)
+    {
+       Node temp;
+       temp = del.next;
+       while(temp.next!= null)
+       {
+           del.data = temp.data;
+           del = temp;
+           temp = temp.next;
+       }
+       del.data=temp.data;
+       del.next=null;
+    }
+}
