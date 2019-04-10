@@ -1,0 +1,49 @@
+#include<stdio.h>
+int db[100][100000];
+int dp(int index,int sum,int arr[],int db[][100000])
+{
+    int a=0,b=0;
+    if(index==-1)
+        return 0;
+    if(sum==0)
+        return 1;
+    if(db[index][sum]!=-1)
+        return db[index][sum];
+    if(arr[index]<=sum)
+        a = dp(index-1,sum-arr[index],arr,db);
+    b = dp(index-1,sum,arr,db);
+    db[index][sum]= a||b;
+    return(a||b);
+}
+int main()
+{
+	//code
+	int t,n,i,j,k,l,sum=0;
+	int arr[1001];
+	scanf("%d",&t);
+	while(t--)
+	{
+	    scanf("%d",&n);
+	    sum=0;
+	    l=0;
+	    for(i=0;i<n;i++)
+	    {
+	        scanf("%d",&arr[i]);
+	        sum = sum + arr[i];
+	        for(j=0;j<100000;j++)
+	        {
+	            db[i][j]=-1;
+	        }
+	    }
+	    if(sum%2!=0)
+	    {
+	        printf("NO\n");
+	        continue;
+	    }
+	    l = dp(n-1,sum/2,arr,db);
+	    if(l==1)
+	        printf("YES\n");
+	    else printf("NO\n");
+	}
+	return 0;
+}
